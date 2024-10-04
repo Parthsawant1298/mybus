@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #022b3f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 30px;
+            background-color: #0d4c6d;
+        }
+
+        .image-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image{
+            height: 550px;
+            width: 360px;
+            max-width: 100%;
+            height: auto;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            text-align: center;
+            color: rgb(0, 204, 255);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], input[type="tel"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #1c3f55;
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]::placeholder, input[type="date"]::placeholder, input[type="tel"]::placeholder {
+            color: #a0a0a0;
+        }
+
+        input[type="number"] {
+            text-align: center;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus, input[type="tel"]:focus {
+            border-color: #4fb0b2;
+        }
+
+        button {
+            background-color: #4fb0b2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a9497;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .passenger-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .passenger-input label {
+            margin-right: 10px;
+        }
+
+        .passenger-input button {
+            width: 40px;
+            height: 40px;
+            background-color: #4fb0b2;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .passenger-input button:hover {
+            background-color: #3a9497;
+        }
+
+        .ac-preference {
+            margin-bottom: 20px;
+        }
+
+        .ac-preference label {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .image-section {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .passenger-input {
+                flex-wrap: wrap;
+            }
+
+            .passenger-input label {
+                width: 100%;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+    <script>
+        function incrementPassengers() {
+            var input = document.getElementById("passengers");
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decrementPassengers() {
+            var input = document.getElementById("passengers");
+            if (input.value > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function validatePassengers() {
+            var input = document.getElementById("passengers");
+            if (input.value < 1) {
+                input.value = 1; // Minimum value should be 1
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-section">
+            <h1 class="h1">Lets get Started with our journey !!</h1>
+            <p>or call us on 7900158050<br>Mon to Sat (9:00 am to 9:00 pm)</p>
+            <form action="/form" method="POST">
+                <input type="text" name="origin" placeholder="Trip Origin" required>
+                <input type="text" name="destination" placeholder="Trip Destination" required>
+                <input type="date" name="departureDate" required>
+                <input type="date" name="returnDate" required>
+                <input type="tel" name="phone" placeholder="Your Phone Number" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number">
+
+                <div class="passenger-input">
+                    <label for="passengers">Number of Passengers:</label>
+                    <button type="button" onclick="decrementPassengers()">-</button>
+                    <input type="number" name="passengers" id="passengers" value="1" min="1" onchange="validatePassengers()">
+                    <button type="button" onclick="incrementPassengers()">+</button>
+                </div>
+                <div class="ac-preference">
+                    <label>AC Preference:</label>
+                    <label>
+                        <input type="radio" name="ac-preference" value="ac" checked> AC
+                    </label>
+                    <label>
+                        <input type="radio" name="ac-preference" value="non-ac"> Non-AC
+                    </label>
+                </div>
+                <br>
+                <button type="submit">Next</button>
+            </form>
+        </div>
+        <div class="image-section">
+            <img src="a.jpg" class="image" alt="Colorful scarves">
+        </div>
+    </div>
+</body>
+</html>

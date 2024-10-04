@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        .upnav-bar {
+            background-color: #8f0606;
+            padding: 10px 0;
+            text-align: right;
+            height: 50px;
+        }
+
+       
+
+        .nav-bar {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .nav-item {
+            color: #333;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .menu-button {
+            display: none;
+            position:relative;
+           
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .nav-item {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hi {
+            width: 100%;
+            height: 290px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px;
+            color: white;
+            z-index: 1;
+        }
+
+        .content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            flex: 1 1 300px;
+        }
+
+        .contact-form {
+            flex: 1 1 300px;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input,
+        textarea {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #f7bd00;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            align-self: flex-start;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f7bd00;
+        }
+
+        .footer {
+            background-color: #031851;
+            color: white;
+            padding: 60px 0;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-col {
+            flex: 1 1 200px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #e4b713;
+            height: 2px;
+            width: 50px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bbbbbb;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .footer-col .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin-right: 10px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+            .menu-button {
+                display: block;
+            }
+            .hi {
+                height: 30vh;
+            }
+            .content h1 {
+                font-size: 2em;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+            #map, .contact-form {
+                flex: 1 1 100%;
+            }
+            .footer-col {
+                flex: 1 1 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="upnav-bar">
+        <div class="container">
+           
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <div class="container">
+            <button class="menu-button">&#9776;</button>
+            <div class="nav-items">
+                <a href="http://localhost:8080"><div class="nav-item">HOME</div></a>
+                <a href="buses.html"><div class="nav-item">BUSES</div></a>
+                <a href="faq.html"><div class="nav-item">FAQ</div></a>
+                <a href="contact.html"><div class="nav-item">CONTACT US</div></a>
+            </div>
+            <div class="mobile-menu">
+                <a href="http://localhost:8080"><div class="nav-item">HOME</div></a>
+                <a href="buses.html"><div class="nav-item">BUSES</div></a>
+                <a href="faq.html"><div class="nav-item">FAQ</div></a>
+                <a href="contact.html"><div class="nav-item">CONTACT US</div></a>
+            </div>
+        </div>
+    </nav>
+    <div class="hi">
+        <video class="video-background" autoplay muted loop>
+            <source src="b.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="content">
+            <h1>CONTACT US</h1>
+        </div>
+    </div>
+    <div class="contact-container">
+        <div id="map"></div>
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <p>Feel free to reach out to us with any questions or feedback!</p>
+            <form onsubmit="sendEmail(); return false;">
+                <input type="text" id="name" placeholder="Name" required />
+                <input type="tel" id="contact" placeholder="Phone Number" required />
+                <textarea id="message" placeholder="Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Booking</a></li>
+                        <li><a href="#">Cancellations</a></li>
+                        <li><a href="#">Payment Options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGFydGhzYXdhbnQxMjk4IiwiYSI6ImNscjg0eTJrdjJqbjUybG15MmxtbTN2eWsifQ.jWdA3GQaBCXWOgM5EXbd-A';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [78.9629, 20.5937],
+            zoom: 5
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+
+        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/Anand%20Nagar,%20Ghodbunder%20Road,%20Thane.json?access_token=pk.eyJ1IjoicGFydGhzYXdhbnQxMjk4IiwiYSI6ImNscjg0eTJrdjJqbjUybG15MmxtbTN2eWsifQ.jWdA3GQaBCXWOgM5EXbd-A')
+            .then(response => response.json())
+            .then(data => {
+                var coordinates = data.features[0].center;
+                map.setCenter(coordinates);
+                map.setZoom(14);
+                new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
+            })
+            .catch(error => console.error('Error:', error));
+
+        function sendEmail() {
+            var name = document.getElementById("name").value;
+            var contact = document.getElementById("contact").value;
+            var message = document.getElementById("message").value;
+  
+            var body = "Name: " + name + "<br/> Contact Number: " + contact + "<br/> Message: " + message;
+  
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "sawant.parth15@gmail.com",
+                Password: "162320786F1659F1BD5C55F049CA4D687ACB",
+                To: "siddhanth.arlekar@gmail.com",
+                From: "sawant.parth15@gmail.com",
+                Subject: "New contact for enquiry",
+                Body: body,
+            }).then(
+                message => alert(message)
+            );
+        }
+
+        // Mobile menu toggle
+        const menuButton = document.querySelector('.menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

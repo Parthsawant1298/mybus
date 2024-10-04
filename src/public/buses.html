@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Buses - Skyline Bus Hire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .upnav-bar {
+            background-color: #8f0606;
+            padding: 10px 0;
+            text-align: right;
+            height: 50px;
+        }
+
+        .sign-in {
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 23px;
+            margin-left: 25px;
+            margin-right: 40px;
+        }
+
+        .nav-item {
+            display: flex;
+            justify-content: space-between;
+            /* Distribute space between logo and nav items */
+            align-items: center;
+            /* Center items vertically */
+            color: #333;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .nav-logo {
+            margin-right: auto;
+        }
+
+        .nav-content {
+            /* gap: 20px; */
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        /* .logo{
+            
+        } */
+        .menu-button {
+            display: none;
+            position: relative;
+            right: 20px;
+            left: 0;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            /* left: 0; */
+            right: 0;
+            width: 100%;
+            background-color: #fff;
+            z-index: 1000;
+
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-nav-logo{
+            display: none;
+        }
+
+        .mobile-menu .nav-item {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .search-box {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .search-box input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .bus-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .bus-box {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex: 1 1 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bus-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .bus-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .bus-details {
+            padding: 20px;
+        }
+        .bus-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0a2240;
+        }
+        .bus-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .book-btn {
+            background-color: #f7bd00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .book-btn:hover {
+            background-color: #e9d60a;
+        }
+        .footer {
+            background-color: #031851;
+            color: white;
+            padding: 60px 0;
+            margin-top: 50px;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .footer-col {
+            flex: 1 1 200px;
+        }
+        .footer-col h4 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #e4b713;
+            height: 2px;
+            width: 50px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: #bbbbbb;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+        .footer-col .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin-right: 10px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover {
+            color: #24262b;
+            background-color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .nav-bar .container {
+                /* display: flex; */
+                /* justify-content: space-between; */
+                align-items: center;
+                padding: 0px 25px;
+            }
+
+            .mobile-nav-logo{
+                display: block;
+                margin-top: -31px;
+            }
+
+            .menu-button {
+                display: block;
+                order: 3;
+                /* Moves menu button to the right */
+                margin-left: auto;
+                font-size: 24px;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .nav-items {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                z-index: 1000;
+            }
+
+            .mobile-menu.active {
+                display: block;
+            }
+
+            .mobile-menu .nav-item {
+                display: block;
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+
+            /* Hide the regular nav logo */
+            /* .nav-logo {
+                display: none;
+            } */
+
+            .menu-button {
+                display: block;
+            }
+
+            .hero-wrap {
+                height: 50vh;
+            }
+
+            .h1 {
+                font-size: 2em;
+            }
+
+            .h5,
+            .h6 {
+                font-size: 1em;
+            }
+
+            .bus-card {
+                flex: 1 1 100%;
+            }
+
+            .why-us-box {
+                flex: 1 1 100%;
+            }
+
+            .home-banner-heading {
+                font-size: 1.5em;
+            }
+
+            .home-banner-sub-heading {
+                font-size: 1em;
+            }
+
+            .footer-col {
+                flex: 1 1 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="upnav-bar"></div>
+        <div class="container">
+
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <div class="container">
+            <button class="menu-button">&#9776;</button>
+            <div class="nav-content">
+                <div class="nav-items">
+                    <div class="nav-logo">
+                        <img width="50px" height="50px" class="logo" src="logo.jpg" alt="logo">
+                    </div>
+                    <a href="http://localhost:8080">
+                        <div class="nav-item">HOME</div>
+                    </a>
+                    <a href="buses.html">
+                        <div class="nav-item">BUSES</div>
+                    </a>
+                    <a href="faq.html">
+                        <div class="nav-item">FAQ</div>
+                    </a>
+                    <a href="contact.html">
+                        <div class="nav-item">CONTACT US</div>
+                    </a>
+                </div>
+            </div>
+            <img class="mobile-nav-logo" width="30px" height="30px" class="logo" src="logo.jpg" alt="logo">
+            <div class="mobile-menu">
+                <a href="http://localhost:8080">
+                    <div class="nav-item">HOME</div>
+                </a>
+                <a href="buses.html">
+                    <div class="nav-item">BUSES</div>
+                </a>
+                <a href="faq.html">
+                    <div class="nav-item">FAQ</div>
+                </a>
+                <a href="contact.html">
+                    <div class="nav-item">CONTACT US</div>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="search-bus-input" placeholder="Search for buses..." onkeyup="filterBuses()">
+        </div>
+        <div class="bus-container">
+            <!-- Bus 1 -->
+            <div class="bus-box">
+                <img src="b.jpg" alt="Force Tempo Traveller" class="bus-image">
+                <div class="bus-details">
+                    <div class="bus-title">Force Tempo Traveller</div>
+                    <div class="bus-text">17 - 25 seater</div>
+                    <div class="bus-text">Perfect for small groups, our Force Tempo Travellers offer excellent maneuverability and comfort. Equipped with air conditioning, reclining seats, and ample legroom, these vehicles ensure a pleasant journey for short to medium distances.</div>
+                    <a href="http://localhost:8000"><button class="book-btn">Book Now</button></a>
+                </div>
+            </div>
+            
+            <!-- Bus 2 -->
+            <div class="bus-box">
+                <img src="c.jpg" alt="Bharatbenz Bus" class="bus-image">
+                <div class="bus-details">
+                    <div class="bus-title">Bharatbenz Bus</div>
+                    <div class="bus-text">30 - 35 seater</div>
+                    <div class="bus-text">Our Bharatbenz buses are ideal for medium-sized groups. They offer a perfect balance of comfort and capacity, featuring spacious seating, air conditioning, and large windows for scenic views. Great for longer journeys and highway travel.</div>
+                    <a href="http://localhost:8000"><button class="book-btn">Book Now</button></a>
+                </div>
+            </div>
+
+            <!-- Bus 3 -->
+            <div class="bus-box">
+                <img src="d.jpg" alt="Luxury Coach" class="bus-image">
+                <div class="bus-details">
+                    <div class="bus-title">Luxury Coach</div>
+                    <div class="bus-text">45+ seater</div>
+                    <div class="bus-text">Experience ultimate comfort with our luxury coaches. These buses are perfect for large groups and long-distance travel. Featuring plush seating, onboard entertainment systems, ample luggage space, and advanced safety features for a premium travel experience.</div>
+                    <a href="http://localhost:8000"><button class="book-btn">Book Now</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Booking</a></li>
+                        <li><a href="#">Cancellations</a></li>
+                        <li><a href="#">Payment Options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function filterBuses() {
+            const searchValue = document.getElementById('search-bus-input').value.toLowerCase();
+            const busBoxes = document.getElementsByClassName('bus-box');
+
+            for (let i = 0; i < busBoxes.length; i++) {
+                const title = busBoxes[i].getElementsByClassName('bus-title')[0].innerText.toLowerCase();
+                const text = busBoxes[i].getElementsByClassName('bus-text')[1].innerText.toLowerCase();
+                if (title.includes(searchValue) || text.includes(searchValue)) {
+                    busBoxes[i].style.display = 'block';
+                } else {
+                    busBoxes[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Mobile menu toggle
+        const menuButton = document.querySelector('.menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
