@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 // Handle form submission
 app.post('/form', (req, res) => {
-  const { origin, destination, departureDate, returnDate, passengers, 'ac-preference': acPreference, 'phone': phone } = req.body;
+  const { origin, destination, departureDate, returnDate, passengers, 'ac-preference': acPreference , 'phone': phone } = req.body;
 
   console.log(`Origin: ${origin}, Destination: ${destination}, Departure: ${departureDate}, Return: ${returnDate}, Passengers: ${passengers}, AC Preference: ${acPreference}, Phone: ${phone}`);
 
@@ -34,8 +34,6 @@ app.post('/form', (req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 8000;
-
-// Listen on all interfaces (0.0.0.0)
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on http://192.168.29.241:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
